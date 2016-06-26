@@ -16,61 +16,70 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" })) {
     @Html.ValidationSummary()
 
+    <div style="display:none"> @Html.TextBoxFor(f => f.festival.ID);</div>
 
-    <div class="form-group">
-        <div style="display:none"> @Html.TextBoxFor(f => f.festival.ID);</div>
-        <label>Naam: </label>
-        @Html.TextBoxFor(f => f.festival.Name)
-    </div>
-    <div class="form-group">
-        <label>Beschrijving: </label>
-        @Html.TextAreaFor(f => f.festival.Description)
-    </div>
-    <div class="form-group">
-        <label>afbeeldingen: </label>
-        <input type="file" name="pictures[0]" id="pictures[0]" style="width: 100%;" />
-        <input type="file" name="pictures[1]" id="pictures[1]" style="width: 100%;" />
-        <input type="file" name="pictures[2]" id="pictures[2]" style="width: 100%;" />
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-md-2">Naam: </label>
+            @Html.TextBoxFor(f => f.festival.Name, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label class="col-md-2">Beschrijving: </label>
+            @Html.TextAreaFor(f => f.festival.Description, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label class="col-md-2">afbeeldingen: </label>
+            <input type="file" name="pictures[0]" id="pictures[0]" style="width: 100%;" />
+            <input type="file" name="pictures[1]" id="pictures[1]" style="width: 100%;" />
+            <input type="file" name="pictures[2]" id="pictures[2]" style="width: 100%;" />
 
-    </div>
-    <div class="form-group">
-        <label>type: </label>
-        @Html.DropDownListFor(f => f.festival.Type, (new[] {
+        </div>
+        <div class="form-group">
+            <label class="col-md-2">type: </label>
+            @Html.DropDownListFor(f => f.festival.Type, (new[] {
                                 new SelectListItem() { Value = "Muziek", Text = "Muziek" },
                                 new SelectListItem() { Value = "Theater", Text = "Theater" },
                                 new SelectListItem() { Value = "Film", Text = "Film" },
                                 new SelectListItem() { Value = "Game", Text = "Game" }
-                             }))
+                             }), new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2">Genre: </label>
+            @Html.TextBoxFor(f => f.festival.Genre, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group row ">
+            <label class="col-md-2 ">leeftijd:</label>
+            <div class="form-inline row">
+                <label >van:</label>
+                @Html.TextBoxFor(f => f.festival.MinAge, new { @class = "form-control" })
+            </div>
+            <div class="form-inline row">
+                <label> tot:</label>
+                @Html.TextBoxFor(f => f.festival.MaxAge, new { @class = "form-control" })
+            </div>
+
+        </div>
+
+        <div class="form-group ">
+            <label class="col-md-2">Datums: </label> <br />
+            @Html.TextBoxFor(f => f.dates[0].Datum, new { @class = "form-control" }) <br />
+            @Html.TextBoxFor(f => f.dates[1].Datum, new { @class = "form-control" }) <br />
+            @Html.TextBoxFor(f => f.dates[2].Datum, new { @class = "form-control" })
+
+        </div>
+
+        <div class="form-group ">
+            <label class="col-md-2">Locaties: </label> <br />
+            @Html.TextBoxFor(f => f.locations[0].City, new { @class = "form-control" }) <br />
+            @Html.TextBoxFor(f => f.locations[1].City, new { @class = "form-control" }) <br />
+            @Html.TextBoxFor(f => f.locations[2].City, new { @class = "form-control" })
+        </div>
+
+        <div class="btn-group">
+            <input class="btn btn-success" type="submit" value="Opslaan" />
+        </div>
+
     </div>
-
-    <div class="form-group">
-        <label>Genre: </label>
-        @Html.TextBoxFor(f => f.festival.Genre )
-    </div>
-
-    <div class="form-group">
-        <label>leeftijd van: </label>
-        @Html.TextBoxFor(f => f.festival.MinAge )
-        <label> tot:</label>
-        @Html.TextBoxFor(f => f.festival.MaxAge )
-    </div>
-
-    <div class="form-group ">
-        <label>Datums: </label> <br />
-        @Html.TextBoxFor(f => f.dates[0].Datum ) <br />
-        @Html.TextBoxFor(f => f.dates[1].Datum ) <br />
-        @Html.TextBoxFor(f => f.dates[2].Datum )
-
-    </div>
-
-    <div class="form-group ">
-        <label>Locaties: </label> <br />
-        @Html.TextBoxFor(f => f.locations[0].City ) <br />
-        @Html.TextBoxFor(f => f.locations[1].City ) <br />
-        @Html.TextBoxFor(f => f.locations[2].City )
-    </div>
-
-
-    <input class="btn btn-succes" type="submit" value="Opslaan" />
-
 }

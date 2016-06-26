@@ -74,6 +74,10 @@
     <Compile Include="Migrations\201606261114388_AddedSomeValidation.Designer.cs">
       <DependentUpon>201606261114388_AddedSomeValidation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606261606376_disabledverification.cs" />
+    <Compile Include="Migrations\201606261606376_disabledverification.Designer.cs">
+      <DependentUpon>201606261606376_disabledverification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -90,6 +94,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606261114388_AddedSomeValidation.resx">
       <DependentUpon>201606261114388_AddedSomeValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606261606376_disabledverification.resx">
+      <DependentUpon>201606261606376_disabledverification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -23,50 +23,35 @@ namespace FestiFact.WebUI.Areas.Manager {
 
         public ActionResult AcceptOrDeclineOrganisation(int id, bool b) {
 
-            foreach (var o in context.Users.OfType<Organisation>().ToList()) {
+            Organisation organisation = (Organisation)context.Users.Find(id);
 
-                if (o.ID == id) {
+            if (b) {
+                organisation.Acces = "Toegang";
+                context.Entry(organisation).State = EntityState.Modified;
+            } else context.Users.Remove(organisation);
 
-                    if (b) {
-                        o.Acces = "Toegang";
-                        AddOrUpdateOrganisation(o);
-                    } else {
-                        context.Users.Remove(o);
-                    }
 
-                    context.SaveChanges();
-                    return RedirectToAction("Overview");
-                }
-            }
-
+            context.SaveChanges();
             return RedirectToAction("Overview");
         }
 
         [HttpGet]
-        public ActionResult AddOrUpdateOrganisation(int id) {
+        public ActionResult UpdateOrganisation(int id ) {
 
-            foreach (var o in context.Users.OfType<Organisation>().ToList()) {
+            if (id != 0) {
+                Organisation organisation = (Organisation)context.Users.Find(id);
+                return View(organisation);
+            } else return View();
 
-                if (o.ID.Equals(id))
-                    return View(o);
-            }
-            return View();
         }
+       
         [HttpPost]
-        public ActionResult AddOrUpdateOrganisation(Organisation organisation) {
+        public ActionResult UpdateOrganisation(Organisation organisation) {
 
-            if (context.Users.Any(o => o.ID == organisation.ID)) {
-                context.Users.Attach(organisation);
-                context.Entry(organisation).State = EntityState.Modified;
-            } else {
-                context.Users.Add(organisation);
-            }
-
+            context.Entry(organisation).State = EntityState.Modified;
             context.SaveChanges();
-
             return RedirectToAction("Overview");
         }
-
 
     }
 }

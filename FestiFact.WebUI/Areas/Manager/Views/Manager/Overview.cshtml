@@ -9,60 +9,62 @@
 @{
     ViewBag.Title = "Overview";
 }
+<br /> <br />
 
-<h2>Overview</h2>
+<h4><strong>Nieuwe aanmeldingen</strong> </h4> 
 
-
-<p> Aanmeldingen:</p>
-
-<table>
+<table class="table table-striped table-hover ">
     <tr>
-        <th style="padding-right: 10px">Nummer</th>
-        <th style="padding-right: 10px">Organisatie</th>
-        <th style="padding-right: 10px">E-mail</th>
-        <th style="padding-right: 10px">Telefoon</th>
-        <th style="padding-right: 10px">Toegang</th>
-        <th colspan="2"> Bevestingen</th>
+        <th>Nummer</th>
+        <th>Organisatie</th>
+        <th>E-mail</th>
+        <th>Telefoon</th>
+        <th>Toegang</th>
+        <th class="text-center">Bevestingen</th>
 
     </tr>
 
     @foreach (var o in Model.getPendingOrganisations()) {
         i++;
-        <tr>
-            <td style="padding-right: 10px">@i</td>
-            <td style="padding-right: 10px">@o.Name</td>
-            <td style="padding-right: 10px">@o.Email</td>
-            <td style="padding-right: 10px">@o.Tel</td>
-            <td style="padding-right: 10px">@o.Acces</td>
-            <td style="padding-right: 10px"><button class="btn btn-danger" onclick="location.href='@Url.Action("AcceptOrDeclineOrganisation", "Manager", new { id = @o.ID, b = false })'">Weigeren</button></td>
-            <td><button class="btn btn-success" onclick="location.href='@Url.Action("AcceptOrDeclineOrganisation", "Manager", new { id = @o.ID, b = true })'">Accepteren</button></td>
+        <tr >
+            <td>@i</td>
+            <td>@o.Name</td>
+            <td>@o.Email</td>
+            <td>@o.Tel</td>
+            <td>@o.Acces</td>
+            <td class="text-right">
+            <button class="btn btn-danger" onclick="location.href='@Url.Action("AcceptOrDeclineOrganisation", "Manager", new { id = @o.ID, b = false })'">Weigeren</button>
+            <button class="btn btn-success" onclick="location.href='@Url.Action("AcceptOrDeclineOrganisation", "Manager", new { id = @o.ID, b = true })'">Accepteren</button>
         </tr>
     }
 </table>
 @{i = 0; }
 <hr />
 
-<table>
+<h4><strong>Aangemeld</strong></h4>
+<table class="table table-striped table-hover">
     <tr>
-        <th style="padding-right: 10px">Nummer</th>
-        <th style="padding-right: 10px">Organisatie</th>
-        <th style="padding-right: 10px">E-mail</th>
-        <th style="padding-right: 10px">Telefoon</th>
-        <th style="padding-right: 10px">Toegang</th>
-        <th colspan="2"> Bevestingen</th>
+        <th>Nummer</th>
+        <th>Organisatie</th>
+        <th>E-mail</th>
+        <th>Telefoon</th>
+        <th>Toegang</th>
+        <th class="text-center"> Wijzig</th>
 
     </tr>
 
     @foreach (var o in Model.getAcceptedOrganisations()) {
         i++;
             <tr>
-                <td style="padding-right: 10px">@i</td>
-                <td style="padding-right: 10px">@o.Name</td>
-                <td style="padding-right: 10px">@o.Email</td>
-                <td style="padding-right: 10px">@o.Tel</td>
-                <td style="padding-right: 10px">@o.Acces</td>
-                <td style="padding-right: 10px"><button class="btn btn-danger" name="decline" value="@o.ID" onclick="location.href='@Url.Action("AcceptOrDeclineOrganisation", "Manager", new { id = @o.ID, b = false })'">verwijderen</button></td>
-                <td><button type="submit" value="@o.ID" class="btn btn btn-secondary" onclick="location.href='@Url.Action("AddOrUpdateOrganisation", "Manager", new { id = @o.ID })'">wijzigen</button></td>
+                <td>@i</td>
+                <td>@o.Name</td>
+                <td>@o.Email</td>
+                <td>@o.Tel</td>
+                <td>@o.Acces</td>
+                <td class="text-right">
+                <button class="btn btn-danger" name="decline" value="@o.ID" onclick="location.href='@Url.Action("AcceptOrDeclineOrganisation", "Manager", new { id = @o.ID, b = false })'">verwijderen</button>
+                <button class="btn btn-secondary" type="submit" value="@o.ID"  onclick="location.href='@Url.Action("UpdateOrganisation", "Manager", new { id = @o.ID })'">wijzigen</button>
+                </td>
             </tr>
     }
 </table>

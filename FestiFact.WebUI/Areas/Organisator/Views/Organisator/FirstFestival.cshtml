@@ -1,0 +1,13 @@
+﻿<head>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+
+@{
+    ViewBag.Title = "FirstFestival";
+}
+
+<h2>FirstFestival</h2>
+
+<button class="btn btn-success" style="height : 100px; width : 200px" onclick="location.href='@Url.Action("AddFestival", "Organisator", new {})'">Nieuw festival</button>

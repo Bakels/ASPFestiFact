@@ -1,0 +1,68 @@
+﻿<head>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/modernizr-2.6.2.js"></script>
+    </head>
+
+@model FestiFact.WebUI.Areas.Manager.Models.OverviewModel
+@{ int i = 0;}
+@{
+    ViewBag.Title = "Overview";
+}
+
+<h2>Overview</h2>
+
+
+<p> Aanmeldingen:</p>
+
+<table>
+    <tr>
+        <th style="padding-right: 10px">Nummer</th>
+        <th style="padding-right: 10px">Organisatie</th>
+        <th style="padding-right: 10px">E-mail</th>
+        <th style="padding-right: 10px">Telefoon</th>
+        <th style="padding-right: 10px">Toegang</th>
+        <th colspan="2"> Bevestingen</th>
+
+    </tr>
+
+    @foreach (var o in Model.getPendingOrganisations()) {
+        i++;
+        <tr>
+            <td style="padding-right: 10px">@i</td>
+            <td style="padding-right: 10px">@o.Name</td>
+            <td style="padding-right: 10px">@o.Email</td>
+            <td style="padding-right: 10px">@o.Tel</td>
+            <td style="padding-right: 10px">@o.Acces</td>
+            <td style="padding-right: 10px"><button class="btn btn-danger" onclick="location.href='@Url.Action("AcceptOrDeclineOrganisation", "Manager", new { id = @o.ID, b = false })'">Weigeren</button></td>
+            <td><button class="btn btn-success" onclick="location.href='@Url.Action("AcceptOrDeclineOrganisation", "Manager", new { id = @o.ID, b = true })'">Accepteren</button></td>
+        </tr>
+    }
+</table>
+@{i = 0; }
+<hr />
+
+<table>
+    <tr>
+        <th style="padding-right: 10px">Nummer</th>
+        <th style="padding-right: 10px">Organisatie</th>
+        <th style="padding-right: 10px">E-mail</th>
+        <th style="padding-right: 10px">Telefoon</th>
+        <th style="padding-right: 10px">Toegang</th>
+        <th colspan="2"> Bevestingen</th>
+
+    </tr>
+
+    @foreach (var o in Model.getAcceptedOrganisations()) {
+        i++;
+            <tr>
+                <td style="padding-right: 10px">@i</td>
+                <td style="padding-right: 10px">@o.Name</td>
+                <td style="padding-right: 10px">@o.Email</td>
+                <td style="padding-right: 10px">@o.Tel</td>
+                <td style="padding-right: 10px">@o.Acces</td>
+                <td style="padding-right: 10px"><button class="btn btn-danger" name="decline" value="@o.ID" onclick="location.href='@Url.Action("AcceptOrDeclineOrganisation", "Manager", new { id = @o.ID, b = false })'">verwijderen</button></td>
+                <td><button type="submit" value="@o.ID" class="btn btn btn-secondary" onclick="location.href='@Url.Action("AddOrUpdateOrganisation", "Manager", new { id = @o.ID })'">wijzigen</button></td>
+            </tr>
+    }
+</table>

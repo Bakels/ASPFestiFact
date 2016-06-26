@@ -1,0 +1,45 @@
+﻿<head>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+
+@model FestiFact.Domain.Entities.Organisation
+
+@{
+    ViewBag.Title = "EditOrganisation";
+}
+
+<h2>@Model.Name</h2>
+
+<p>Informatie</p>
+
+@using (@Html.BeginForm()) {
+<div class="form-group">
+    <div style="display:none" > @Html.TextBoxFor(x => x.ID);</div> 
+    <label>Organisatie: </label>
+    @Html.TextBoxFor(x => x.Name)
+</div>
+<div class="form-group">
+    <label>E-mail: </label>
+    @Html.TextBoxFor(x => x.Email) 
+</div>
+<div class="form-group">
+    <label>Telefoon: </label>
+    @Html.TextBoxFor(x => x.Tel)
+</div>
+<div class="form-group">
+    <label>Toegang: </label>
+    <label>Ja</label>
+    @Html.RadioButtonFor(x => x.Acces, "Toegang" )
+    <label>Nee</label>
+    @Html.RadioButtonFor(x => x.Acces, "Geen toegang")
+</div>
+
+<div class="form-group">
+    <label>Opmerkingen: </label>
+    @Html.TextAreaFor(x => x.Comment)
+</div>
+
+<input class="btn btn-succes" type="submit" value="Opslaan"/>
+}
